@@ -20,11 +20,23 @@ class Student:
             return 'Можно выставить оценку только по десятибальной шкале'
 
     def __str__(self):
+        avg_grade = self.average_grade_homework
         return f'Имя : {self.name} \nФамилия : {self.surname}\n' \
-        f'Средняя оценка за домашние задания : {self.name}\n' \
+        f'Средняя оценка за домашние задания : {avg_grade()}\n' \
         f'Курсы в процессе изучения : {self.courses_in_progress}\n' \
         f'Завершеные курсы : {self.finished_courses}'
-        
+
+    def average_grade_homework(self):
+        overall_grades = 0
+        counter_grades = 0
+        for course_grades in self.grades.values():
+            overall_grades += sum(course_grades)
+            counter_grades += len(course_grades)
+            average_grade = overall_grades / counter_grades 
+        if average_grade > 0:
+            return average_grade
+        else:
+            return 0   
     
 class Mentor:
     def __init__(self, name, surname):
@@ -41,18 +53,19 @@ class Lecturer(Mentor):
 
     def __str__(self):
         avg_grade = self.average_grade_lection
-        return f'Имя : {self.name} \nФамилия : {self.surname} \nСредняя оценка за лекции : {avg_grade}'
+        return f'Имя : {self.name} \nФамилия : {self.surname} \nСредняя оценка за лекции : {avg_grade()}'
     
     def average_grade_lection(self):
-        total_grades = 0
-        count_grades = 0
+        overall_grades = 0
+        counter_grades = 0
         for course_grades in self.grades.values():
-            total_grades += sum(course_grades)
-            count_grades += len(course_grades)
-        return total_grades / count_grades if count_grades > 0 else 0
-    
-            
-        return avg
+            overall_grades += sum(course_grades)
+            counter_grades += len(course_grades)
+            average_grade = overall_grades / counter_grades 
+        if average_grade > 0:
+            return average_grade
+        else:
+            return 0
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -77,13 +90,13 @@ any_lecturer.courses_attached += ['Git', 'Python', 'Java']
 some_reviewer = Reviewer ('Magister', 'Yoda')
 some_reviewer.courses_attached += ['Python', 'Git']
  
-some_reviewer.rate_hw(some_student, 'Python', 7)
+some_reviewer.rate_hw(some_student, 'Python', 10)
 some_reviewer.rate_hw(some_student, 'Git', 10)
 some_reviewer.rate_hw(some_student, 'Python', 9)
 
-some_student.give_grades(any_lecturer, 'Git', 9)
-some_student.give_grades(any_lecturer, 'Java', 0)
-some_student.give_grades(any_lecturer, 'Python', 10)
+some_student.give_grades(any_lecturer, 'Git', 9.9)
+some_student.give_grades(any_lecturer, 'Python', 9.9)
+some_student.give_grades(any_lecturer, 'Python', 9.9)
 
 print(some_student.grades)
 print(any_lecturer.grades)
