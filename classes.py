@@ -161,10 +161,11 @@ second_student.give_grades(first_lecturer,'Python',8)
 second_student.give_grades(second_lecturer,'Python',6)
 
 # функция на подсчет средней оценки по выбранному курсу
-def average_grade_homework_in_course(student, grade):
+
+def average_grade_homework_in_course(student, course):
         overall_grades = 0
         counter_grades = 0
-        courses = 0
+        courses = 'Python'
         for student in students:
             if courses in student.grades:
                 overall_grades += sum(student.grades[courses])
@@ -172,10 +173,10 @@ def average_grade_homework_in_course(student, grade):
                 average_grade = overall_grades / counter_grades 
         return overall_grades / counter_grades if counter_grades > 0 else 0
 
-def average_grade_lection_in_course(lecturer, grade):
+def average_grade_lection_in_course(lecturer, course):
         overall_grades = 0
         counter_grades = 0
-        courses = None
+        courses = 'Python'
         for lecturer in lecturers:
             if courses in lecturer.grades:
                 overall_grades += sum(lecturer.grades[courses])
@@ -183,9 +184,9 @@ def average_grade_lection_in_course(lecturer, grade):
                 average_grade = overall_grades / counter_grades 
         return overall_grades / counter_grades if counter_grades > 0 else 0
 
-lecturers = [first_lecturer,second_lecturer]
-students = [first_student,second_student]
+lecturers = [first_lecturer, second_lecturer]
+students = [first_student, second_student]
 
-print(f'Средняя оценка по всем студентам в рамках курса : {average_grade_homework_in_course(students, "Python")}')
+print(f'Средняя оценка по всем студентам в рамках курса : {average_grade_homework_in_course(students, 'Python')}')
 
 print(f'Средняя оценка по всем лекторам в рамках курса : {average_grade_lection_in_course(lecturers, "Python")}')
