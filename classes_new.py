@@ -182,7 +182,7 @@ print(student_2,'\n')
 print(lecturer_1,'\n')
 print(lecturer_2,'\n')
 
-#Вывод магического __lt__
+#Вывод магического __lt__ ,__eq__
 
 if lecturer_1 < lecturer_2: 
     print (f'{lecturer_1.name} {lecturer_1.surname} имеет более низкую среднюю оценку, чем {lecturer_2.name} {lecturer_2.surname}','\n')
